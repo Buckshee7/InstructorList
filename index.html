@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSD61 Instructors</title>
+    <script src="app.js"></script>
+</head>
+<body>
+    <h1>PSD61 Instructors</h1>
+    <section>
+        <h2>Add New Instructor</h2>
+        <form id="new-instructor">
+            <label for="first-name">First Name</label>
+            <input type="text" name="first-name" required>
+            <label for="last-name">First Name</label>
+            <input type="text" name="last-name" required>
+            <label for="speicality"></label>
+            <div>
+                <p>Speciality</p>
+                <select name="speciality" id="speciality" required>
+                    <option value="" hidden selected>Select Option</option>
+                    <option value="Card Tricks">Card Tricks</option>
+                    <option value="Taking Reguar Breaks">Taking Regular Breaks</option>
+                    <option value="Abandoning Ship">Abandoning Ship</option>
+                    <option value="Musical Statues">Card Tricks</option>
+                </select>
+            </div>
+            <div class="radio">
+                <p>Has A Pet?</p>
+                <label for="hasPet">Yes</label>
+                <input type="radio" name="haspet" id="hasPetYes" value="true">
+                <label for="hasPet">No</label>
+                <input type="radio" name="haspet" id="haspetNo" value="false">
+            </div>
+            <input id="submit-button" type="submit">
+        </form>
+    </section>
+    <section>
+        <h2>All Instructors</h2>
+        <ul id="instructors-list"></ul>
+    </section>
+</body>
+</html>
