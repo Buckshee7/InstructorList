@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-const instructors = [];
+let instructors = [];
 
 const createNewInstructor = (event) => {
     // create newInstructor and add to instructors list
@@ -15,7 +15,7 @@ const createNewInstructor = (event) => {
     let hasPet = undefined;
     if (event.target.hasPetYes === false){
         haspet = false;
-    } else{
+    } else {
         hasPet = true;
     };
 
@@ -52,18 +52,18 @@ const createNewListItem = (newInstructor) => {
     voteButton.addEventListener('click', handleVote)
 
     // // add elements to li
-    listElement.append(name) 
-    listElement.append(speciality) 
-    listElement.append(pet) 
-    listElement.append(ranking) 
-    listElement.append(voteButton) 
-    listElement.append(deleteButton) 
+    listElement.append(name);
+    listElement.append(speciality);
+    listElement.append(pet);
+    listElement.append(ranking);
+    listElement.append(voteButton);
+    listElement.append(deleteButton);
 
     return listElement;
 }
 
-const handleDeleteSingle = () => {
-  return "okay"
+const handleDeleteSingle = (event) => {
+  event.target.parentNode.remove();
 }
 
 const handleVote = () => {
@@ -87,4 +87,5 @@ const handleSubmit = (event) => {
 const handleDeleteAll = () => {
     const parentNode = document.querySelector('#instructors-list');
     parentNode.innerHTML = ""
+    instructors = [];
 };
