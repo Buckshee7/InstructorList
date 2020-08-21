@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+    refreshListElements();
+
     const form = document.querySelector('#new-instructor');
     form.addEventListener('submit', handleSubmit);
 
@@ -89,12 +91,18 @@ const recalculateRankings = () => {
 const refreshListElements = () => {
     const parentNode = document.querySelector('#instructors-list');
     parentNode.innerHTML = "";
-    
-    instructors.forEach((instructor) => {
-        const listItem = createNewListItem(instructor);
-        parentNode.append(listItem);
-    });
-}
+
+    if (instructors.length === 0){
+        const h3 = document.createElement('h3');
+        h3.innerHTML = 'No Instructors to Display :('
+        parentNode.append(h3);
+    } else {
+        instructors.forEach((instructor) => {
+            const listItem = createNewListItem(instructor);
+            parentNode.append(listItem);
+        });
+    };
+};
 
 const handleDeleteSingle = (event) => {
     event.target.parentNode.remove();
@@ -158,8 +166,8 @@ const handleSubmitSpeciality = (event) => {
 
             // recreate addSpecialityButton
         const addSpecialityButton = document.createElement('button');
-        addSpecialityButton.innerHTML = "Add Speciality"
-        addSpecialityButton.id = "add-speciality"
+        addSpecialityButton.innerHTML = "Add Speciality";
+        addSpecialityButton.id = "add-speciality";
         
         const parentNode = document.querySelector('#new-speciality');
         parentNode.append(addSpecialityButton);
@@ -168,23 +176,21 @@ const handleSubmitSpeciality = (event) => {
     };
 };
 
-
-
 const handleAddSpeciality = (event) => {
 
     const parentNode = document.querySelector('#new-speciality');
     const label = document.createElement('label');
     const input = document.createElement('input');
 
-    label.htmlFor = "new-spesh"
+    label.htmlFor = "new-spesh";
     label.innerHTML = "New Speciality";
-    input.id = "new-spesh"
-    input.type = "text"
-    input.placeholder = "Press Enter to Submit"
-    input.addEventListener('keydown', handleSubmitSpeciality)
+    input.id = "new-spesh";
+    input.type = "text";
+    input.placeholder = "Press Enter to Submit";
+    input.addEventListener('keydown', handleSubmitSpeciality);
     
-    parentNode.append(label)
-    parentNode.append(input)
+    parentNode.append(label);
+    parentNode.append(input);
 
     const addSpecialityButton = document.querySelector('#add-speciality');
     addSpecialityButton.remove();
