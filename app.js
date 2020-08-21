@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const deleteAll = document.querySelector('#delete-all');
     deleteAll.addEventListener('click', handleDeleteAll);
 
+    const addSpecialityButton = document.querySelector('#add-speciality');
+    addSpecialityButton.addEventListener('click', handleAddSpeciality);
 });
 
 let instructors = [];
@@ -50,7 +52,7 @@ const createNewListItem = (newInstructor) => {
     ranking.textContent = `Instructor Ranking: ${newInstructor.ranking}`;
     deleteButton.textContent = "Delete Instructor";
     deleteButton.addEventListener('click', handleDeleteSingle);
-    voteButton.textContent = "Upvote Instructor";
+    voteButton.textContent = "Up-Vote Instructor";
     voteButton.addEventListener('click', handleVote);
 
     // // add elements to li
@@ -119,13 +121,9 @@ const handleVote = (event) => {
 const handleSubmit = (event) => {
     event.preventDefault();
 
-    const newInstructor = createNewInstructor(event);
+    createNewInstructor(event);
 
-    const listItem = createNewListItem(newInstructor);
-
-    // add li to parent node
-    const parentNode = document.querySelector('#instructors-list');
-    parentNode.append(listItem);
+    refreshListElements();
 
     event.target.reset();
 };
@@ -134,4 +132,61 @@ const handleDeleteAll = () => {
     const parentNode = document.querySelector('#instructors-list');
     parentNode.innerHTML = "";
     instructors = [];
+};
+
+const addNewOption = (event) => {
+    const option = document.createElement('option')
+    option.value = event.target.value
+    option.innerHTML = event.target.value
+    const parentNode = document.querySelector('#speciality')
+    parentNode.append(option)
+}
+
+const handleSubmitSpeciality = (event) => {
+    // event.preventDefault()
+    // this stops the form validation of required fields happening 
+        // it seems to act like a submit button
+        // this also stops it updating the input filed with the key pressed :(
+            // fixed by putting in the if statement :D
+    
+    if (event.key === "Enter") {
+        event.preventDefault();
+        addNewOption(event);
+
+        // reset this part of form
+        event.target.parentNode.innerHTML = "";
+
+            // recreate addSpecialityButton
+        const addSpecialityButton = document.createElement('button');
+        addSpecialityButton.innerHTML = "Add Speciality"
+        addSpecialityButton.id = "add-speciality"
+        
+        const parentNode = document.querySelector('#new-speciality');
+        parentNode.append(addSpecialityButton);
+        // need new handler even though one is defined for this id at the top....
+        addSpecialityButton.addEventListener('click', handleAddSpeciality);
+    };
+};
+
+
+
+const handleAddSpeciality = (event) => {
+
+    const parentNode = document.querySelector('#new-speciality');
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+
+    label.htmlFor = "new-spesh"
+    label.innerHTML = "New Speciality";
+    input.id = "new-spesh"
+    input.type = "text"
+    input.placeholder = "Press Enter to Submit"
+    input.addEventListener('keydown', handleSubmitSpeciality)
+    
+    parentNode.append(label)
+    parentNode.append(input)
+
+    const addSpecialityButton = document.querySelector('#add-speciality');
+    addSpecialityButton.remove();
+    
 };
