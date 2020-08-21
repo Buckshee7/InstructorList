@@ -78,24 +78,13 @@ const getInstructorIndex = (event) => {
     return instructorIndex;
 };
 
-const handleDeleteSingle = (event) => {
-    event.target.parentNode.remove();
-
-    //delete from instructors array
-    const instructorIndex = getInstructorIndex(event);
-    instructors.splice(instructorIndex, 1);
+const recalculateRankings = () => {
+    instructors.forEach((instructor) => {
+        instructor.ranking = calculateRanking(instructor.votes);
+    });
 };
 
-const handleVote = (event) => {
-    const instructorIndex = getInstructorIndex(event);
-    instructors[instructorIndex].votes += 1;
-
-    // recalculate rankings for every instructor
-    instructors.forEach((instructor) => {
-        instructor.recalculateRank(instructor);
-    });
-
-    //update the list elements
+const refreshListElements = () => {
     const parentNode = document.querySelector('#instructors-list');
     parentNode.innerHTML = "";
     
@@ -103,7 +92,28 @@ const handleVote = (event) => {
         const listItem = createNewListItem(instructor);
         parentNode.append(listItem);
     });
+}
 
+const handleDeleteSingle = (event) => {
+    event.target.parentNode.remove();
+
+    //delete from instructors array
+    const instructorIndex = getInstructorIndex(event);
+    instructors.splice(instructorIndex, 1);
+
+    recalculateRankings();
+    refreshListElements();
+};
+
+const handleVote = (event) => {
+    const instructorIndex = getInstructorIndex(event);
+    instructors[instructorIndex].votes += 1;
+
+    // recalculate rankings for every instructor
+    recalculateRankings();
+
+    //update the list elements to show new rankings
+    refreshListElements();
 };
 
 const handleSubmit = (event) => {

@@ -16,8 +16,3 @@ function calculateRanking(votes) {
     }).length + 1;
     return rank;
   };
-
-// tried using this keyword but didnt work so did it this way instead
-Instructor.prototype.recalculateRank = (instructor) => {
-    instructor.ranking =  calculateRanking(instructor.votes);
-}
