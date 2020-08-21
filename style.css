@@ -1,0 +1,72 @@
+
+body {
+    margin: 0;
+}
+
+body > h1 {
+    padding: 24px;
+    background-color: rgb(248, 221, 164);
+    width: 100%;
+    margin: 0;
+}
+
+body > section {
+    padding: 24px 0;
+
+}
+
+#top-half {
+    background-color: rgb(247, 238, 218);
+    width: 100%;
+    padding: 12px 20px;
+}
+
+label {
+    margin-right: 8px;
+}
+
+#new-instructor > div {
+    display: flex;
+    margin: 8px;
+}
+
+#speciality {
+    margin-right: 8px;
+}
+
+#radio > p {
+    margin: 0 12px 0 0;
+}
+
+#radio > input {
+    margin-right: 16px;
+}
+
+input[type='submit'] {
+    margin: 0 0 8px 0;
+}
+
+#bottom-half {
+    width: 100%;
+    padding: 12px 20px;
+}
+
+#instructors-list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+.singleInstructor {
+    background-color: rgb(241, 250, 255);
+    width: 250px;
+    padding: 16px;
+    margin: 0;
+    list-style: none;
+    border-radius: 10px;
+    margin: 8px;
+}
+
+.singleInstructor > button {
+    margin: 0 2px;
+}

@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const addSpecialityButton = document.querySelector('#add-speciality');
     addSpecialityButton.addEventListener('click', handleAddSpeciality);
+
+    const populateButton = document.querySelector('#populate');
+    populateButton.addEventListener('click', handlePopulate)
 });
 
 let instructors = [];
@@ -37,7 +40,8 @@ const createNewInstructor = (event) => {
 
 const createNewListItem = (newInstructor) => {
     // // create li
-    const listElement = document.createElement('li')
+    const listElement = document.createElement('li');
+    listElement.classList = "singleInstructor";
 
     // // create li elements
     const name = document.createElement('h3');
@@ -140,6 +144,7 @@ const handleDeleteAll = () => {
     const parentNode = document.querySelector('#instructors-list');
     parentNode.innerHTML = "";
     instructors = [];
+    refreshListElements();
 };
 
 const addNewOption = (event) => {
@@ -195,4 +200,26 @@ const handleAddSpeciality = (event) => {
     const addSpecialityButton = document.querySelector('#add-speciality');
     addSpecialityButton.remove();
     
+};
+
+const handlePopulate = () => {
+    const ally = new Instructor("Ally", "McGilloway", "Card Tricks", true, 2);
+    const katie = new Instructor("Katie", "Jeffree", "Musical Statues", false, 1);
+    const jen = new Instructor("Jenn", "Ramsay", "Taking Regular Breaks", true, 1);
+    const jarrod = new Instructor("Jarrod", "Bennie", "Abandoning Ship", false, 0);
+    instructors.push(ally);
+    instructors.push(katie);
+    instructors.push(jen);
+    instructors.push(jarrod);
+
+
+    console.log(ally);
+
+    createNewListItem(ally)
+    createNewListItem(katie)
+    createNewListItem(jen)
+    createNewListItem(jarrod)
+
+    recalculateRankings();
+    refreshListElements();
 };

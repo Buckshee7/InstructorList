@@ -1,10 +1,10 @@
 
-const Instructor = function(firstName, lastName, speciality, hasPet){
+const Instructor = function(firstName, lastName, speciality, hasPet, votes = 0){
     this.firstName = firstName;
     this.lastName = lastName;
     this.speciality = speciality;
     this.hasPet = hasPet;
-    this.votes = 0;
+    this.votes = votes;
     this.ranking = calculateRanking(this.votes);
 };
 
