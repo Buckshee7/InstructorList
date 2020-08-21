@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('#new-instructor');
     form.addEventListener('submit', handleSubmit);
 
+    const deleteAll = document.querySelector('#delete-all');
+    deleteAll.addEventListener('click', handleDeleteAll);
+
 });
 
 const instructors = [];
@@ -81,3 +84,7 @@ const handleSubmit = (event) => {
     event.target.reset();
 };
 
+const handleDeleteAll = () => {
+    const parentNode = document.querySelector('#instructors-list');
+    parentNode.innerHTML = ""
+};
