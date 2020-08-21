@@ -12,12 +12,14 @@ let instructors = [];
 const createNewInstructor = (event) => {
     // create newInstructor and add to instructors list
 
+    //radios
     let hasPet = undefined;
-    if (event.target.hasPetYes === false){
-        haspet = false;
-    } else {
-        hasPet = true;
-    };
+    const hasPetRadios = document.querySelectorAll('.radio>input');
+    hasPetRadios.forEach((radio) => {
+      if (radio.checked) {
+          hasPet = radio.value;
+      };
+    });
 
     const newInstructor = new Instructor(
         event.target.firstName.value, 
@@ -33,13 +35,13 @@ const createNewListItem = (newInstructor) => {
     // // create li
     const listElement = document.createElement('li')
 
-    // // create li elemesnts
+    // // create li elements
     const name = document.createElement('h3');
     const speciality = document.createElement('p');
     const pet = document.createElement('p');
     const ranking = document.createElement('p');
-    const deleteButton = document.createElement('button')
-    const voteButton = document.createElement('button')
+    const deleteButton = document.createElement('button');
+    const voteButton = document.createElement('button');
 
     // // add values to li elements
     name.textContent = `Name: ${newInstructor.firstName} ${newInstructor.lastName}`;
@@ -49,7 +51,7 @@ const createNewListItem = (newInstructor) => {
     deleteButton.textContent = "Delete Instructor";
     deleteButton.addEventListener('click', handleDeleteSingle);
     voteButton.textContent = "Upvote Instructor";
-    voteButton.addEventListener('click', handleVote)
+    voteButton.addEventListener('click', handleVote);
 
     // // add elements to li
     listElement.append(name);
@@ -60,15 +62,37 @@ const createNewListItem = (newInstructor) => {
     listElement.append(deleteButton);
 
     return listElement;
-}
+};
+
+const getInstructorIndex = (event) => {
+    const nameElement = event.target.parentNode.querySelector('h3').textContent;
+    const fullName = nameElement.slice(6).split(" ");
+    const firstName = fullName[0];
+    const lastName = fullName[1];
+    let instructorIndex;
+    for (let i=0; i < instructors.length; i++){
+        if (instructors[i].firstName === firstName && instructors[i].lastName === lastName){
+            instructorIndex = i;
+        };
+    };
+    return instructorIndex;
+};
 
 const handleDeleteSingle = (event) => {
-  event.target.parentNode.remove();
-}
+    event.target.parentNode.remove();
 
-const handleVote = () => {
-    return "okay"
-  }
+    //delete from instructors array
+    const instructorIndex = getInstructorIndex(event);
+    instructors.splice(instructorIndex, 1);
+};
+
+const handleVote = (event) => {
+    const instructorIndex = getInstructorIndex(event);
+    console.log(instructors)
+    instructors[instructorIndex].votes += 1;
+    
+    // now need to recalculate rankings for every instructor then update each li
+};
 
 const handleSubmit = (event) => {
     event.preventDefault();
@@ -86,6 +110,6 @@ const handleSubmit = (event) => {
 
 const handleDeleteAll = () => {
     const parentNode = document.querySelector('#instructors-list');
-    parentNode.innerHTML = ""
+    parentNode.innerHTML = "";
     instructors = [];
 };
