@@ -88,10 +88,22 @@ const handleDeleteSingle = (event) => {
 
 const handleVote = (event) => {
     const instructorIndex = getInstructorIndex(event);
-    console.log(instructors)
     instructors[instructorIndex].votes += 1;
+
+    // recalculate rankings for every instructor
+    instructors.forEach((instructor) => {
+        instructor.recalculateRank(instructor);
+    });
+
+    //update the list elements
+    const parentNode = document.querySelector('#instructors-list');
+    parentNode.innerHTML = "";
     
-    // now need to recalculate rankings for every instructor then update each li
+    instructors.forEach((instructor) => {
+        const listItem = createNewListItem(instructor);
+        parentNode.append(listItem);
+    });
+
 };
 
 const handleSubmit = (event) => {

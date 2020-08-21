@@ -17,6 +17,7 @@ function calculateRanking(votes) {
     return rank;
   };
 
-Instructor.prototype.recalculateRank = () => {
-    return calculateRanking(this.votes);
+// tried using this keyword but didnt work so did it this way instead
+Instructor.prototype.recalculateRank = (instructor) => {
+    instructor.ranking =  calculateRanking(instructor.votes);
 }
