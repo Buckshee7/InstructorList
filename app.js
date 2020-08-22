@@ -153,7 +153,7 @@ const addNewOption = (event) => {
     option.innerHTML = event.target.value
     const parentNode = document.querySelector('#speciality')
     parentNode.append(option)
-}
+};
 
 const handleSubmitSpeciality = (event) => {
     // event.preventDefault()
@@ -168,18 +168,14 @@ const handleSubmitSpeciality = (event) => {
 
         // reset this part of form
         event.target.parentNode.innerHTML = "";
-
-            // recreate addSpecialityButton
-        const addSpecialityButton = document.createElement('button');
-        addSpecialityButton.innerHTML = "Add Speciality";
-        addSpecialityButton.id = "add-speciality";
         
         const parentNode = document.querySelector('#new-speciality');
         parentNode.append(addSpecialityButton);
-        // need new handler even though one is defined for this id at the top....
-        addSpecialityButton.addEventListener('click', handleAddSpeciality);
     };
 };
+
+// need to declare this outside of function so it can be used in both handleAddSpeciality and handleSubmitSpeciality
+let addSpecialityButton;
 
 const handleAddSpeciality = (event) => {
 
@@ -197,7 +193,7 @@ const handleAddSpeciality = (event) => {
     parentNode.append(label);
     parentNode.append(input);
 
-    const addSpecialityButton = document.querySelector('#add-speciality');
+    addSpecialityButton = document.querySelector('#add-speciality');
     addSpecialityButton.remove();
     
 };
